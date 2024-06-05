@@ -1,45 +1,59 @@
 # Project Plan
 
 ## Title
-
-Exploring Top-Rated Movies: Insights from IMDB Data
+<!-- Give your project a short title. -->
+Correlation Analysis between Deforestation and CO2 Emissions by Country
 
 ## Main Question
 
-1. Does analyzing top-rated movies from the IMDB website provide insights into popular movie genres and their characteristics?
+<!-- Think about one main question you want to answer based on the data. -->
+1. How do deforestation rates (Net forest conversion) correlate with CO2 emissions in various countries?
 
 ## Description
 
-Analyzing top-rated movies from the IMDB website provides valuable insights into popular movie genres and their characteristics. By examining factors such as release date, language, overview, popularity, and ratings, this project aims to uncover trends and patterns in the movie industry. Understanding these trends can help filmmakers, producers, and distributors make informed decisions about content creation, marketing strategies, and audience targeting.
+<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
+Understanding the relationship between deforestation and CO2 emissions is critical for developing effective climate policies and mitigating climate change impacts. This project aims to analyze the correlation between net forest conversion (deforestation rates) and CO2 emissions by country.
+
+We will use two comprehensive datasets for this analysis. The first dataset provides information on the net change in forest area, which measures forest expansion minus deforestation, for various countries over the years 1990, 2000, 2010, and 2015. The second dataset offers a detailed overview of CO2 emissions by country from 1960 to the present day, covering data from multiple sources such as the UNFCCC and the IEA.
+
+By leveraging statistical techniques, we aim to uncover significant relationships between deforestation rates and CO2 emissions. The findings will provide valuable insights for researchers, policymakers, and environmentalists working on climate action and forest conservation.
 
 ## Datasources
 
-### Datasource1: TMDB Top-Rated Movies
+<!-- Describe each datasource you plan to use in a section. Use the prefix "DatasourceX" where X is the id of the datasource. -->
 
-- Metadata URL: (https://www.kaggle.com/datasets/shubhammaindola/tmdb-top-rated-movies-dataset?select=movie_dataset.csv)
-- Data URL: [TMDB Top-Rated Movies Dataset](https://www.kaggle.com/datasets/shubhammaindola/tmdb-top-rated-movies-dataset?select=movie_dataset.csv)
-- Data Type: CSV
+### Datasource1: Deforestation and Forest Loss
+* Metadata URL: [https://www.kaggle.com/datasets/chiticariucristian/deforestation-and-forest-loss]
+* Data URL: [Kaggle](https://www.kaggle.com/datasets/chiticariucristian/deforestation-and-forest-loss)
+* Data Type: CSV
 
-This dataset consists of all top-rated movies featured on the IMDB website. The dataset is fetched from TMDB API. Unnecessary columns are removed. There are 9335 movie entries with no null values. The fields include:
+#### Description:
+Net change in forest area measures forest expansion (either through afforestation or natural expansion) minus deforestation. The dataset includes the following features:
+- Entity (Country)
+- Code (Country Code)
+- Year (4 unique values for each country: 1990, 2000, 2010, 2015)
+- Net forest conversion (Net change in forest area measures forest expansion)
 
-- id: Unique identifier for each movie
-- title: Title of the movie
-- release_date: Release date of the movie
-- genres: Genres of the movie
-- original_language: Original language of the movie
-- overview: Overview or summary of the movie
-- popularity: Popularity score of the movie
-- vote_count: Number of votes received by the movie
-- vote_average: Average rating of the movie
+### Datasource2: CO2 Emissions by Country
+* Metadata URL: [https://www.kaggle.com/datasets/ulrikthygepedersen/co2-emissions-by-country]
+* Data URL: [Kaggle](https://www.kaggle.com/datasets/ulrikthygepedersen/co2-emissions-by-country)
+* Data Type: CSV
+
+#### Description:
+The CO2 emissions dataset provides a comprehensive overview of the amount of CO2 emitted by each country. It includes information on CO2 emissions by country from 1960 to the present day. The dataset covers all countries in the world and is compiled from various sources, including the United Nations Framework Convention on Climate Change (UNFCCC) and the International Energy Agency (IEA).
+
+This dataset can be used to monitor changes in emissions over time and to assess the effectiveness of climate policies.
 
 ## Work Packages
 
 1. Data Acquisition and Cleaning [#1][i1]
 2. Exploratory Data Analysis [#2][i2]
-3. Statistical Modeling and Predictive Analysis [#3][i3]
+3. Data Integration [#3][i3]
 4. Conclusion and Insights [#4][i4]
+5. Report Writing and Visualization [#5][i5]
 
 [i1]: https://github.com/Nasimattar/made-ns/issues/1
 [i2]: https://github.com/Nasimattar/made-ns/issues/2
 [i3]: https://github.com/Nasimattar/made-ns/issues/3
 [i4]: https://github.com/Nasimattar/made-ns/issues/4
+[i5]: https://github.com/Nasimattar/made-ns/issues/5
