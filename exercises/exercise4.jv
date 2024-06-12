@@ -1,0 +1,80 @@
+pipeline Temperature {
+
+  TemperatureExtractor 
+    -> Unzipper
+    -> DataFilePicker
+    -> TempTextFileInterpreter
+    -> TempCSVFileInterpreter
+    -> TempCellWriter
+    -> HeaderTempCellWriter
+    -> TempCellRangeSelector
+    -> TempTableInterpreter
+    -> TemperatureTransformer
+    -> BatteryTemperatureTransformer
+    -> TemperatureLoader;
+
+  block TemperatureExtractor oftype HttpExtractor {
+
+    url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+
+  }
+
+  block Unzipper oftype ArchiveInterpreter { archiveType: "zip"; }
+
+  block DataFilePicker oftype FilePicker { path: "/data.csv"; }
+
+  block TempTextFileInterpreter oftype TextFileInterpreter {}
+
+  block TempCSVFileInterpreter oftype CSVInterpreter { delimiter: ";"; }
+
+  block TempCellWriter oftype CellWriter {
+    at: range A1:E1;
+    write: ["id" , "producer" , "model" , "month" , "temperature"];
+  }
+
+  block HeaderTempCellWriter oftype CellWriter {
+    at: cell J1;
+    write: ["battery_temperature"];
+  }
+
+  block TempCellRangeSelector oftype CellRangeSelector { select: range A1:J*; }
+
+  constraint positiveInt oftype RangeConstraint { lowerBound: 0; }
+  
+  valuetype PositiveNumber oftype integer { constraints: [ positiveInt ]; }
+
+  block TempTableInterpreter oftype TableInterpreter {
+    header: true;
+    columns: [
+      "id" oftype PositiveNumber,
+      "producer" oftype text,
+      "model" oftype text,
+      "month" oftype integer,
+      "temperature" oftype decimal,
+      "battery_temperature" oftype decimal
+    ];
+  }
+
+  transform TemperatureConverter {
+    from Celsius oftype decimal;
+    to Fahrenheit oftype decimal;
+    Fahrenheit : (Celsius * 9/5) + 32;
+  }
+
+  block TemperatureTransformer oftype TableTransformer {
+    inputColumns: ["temperature"];
+    outputColumn: "temperature";
+    use: TemperatureConverter;
+  }
+
+  block BatteryTemperatureTransformer oftype TableTransformer {
+    inputColumns: ["battery_temperature"];
+    outputColumn: "battery_temperature";
+    use: TemperatureConverter;
+  }
+
+  block TemperatureLoader oftype SQLiteLoader {
+    table: "temperatures";
+    file: "./temperatures.sqlite";
+  }
+}
