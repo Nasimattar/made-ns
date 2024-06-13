@@ -2,7 +2,7 @@ import os
 import unittest
 import importlib
 import pandas as pd
-import sqlite3
+import sqlite3 
 
 pipeline = importlib.import_module("pipeline")
 data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
