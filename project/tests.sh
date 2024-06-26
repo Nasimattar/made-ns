@@ -5,4 +5,4 @@ if [ -z "$test_dir" ]; then
   exit 1
 fi
 cd "$test_dir"
-python3 -m unittest project/tests.py
+python3 -m unittest tests.py
