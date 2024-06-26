@@ -39,8 +39,14 @@ jobs:
         chmod +x project/tests.sh
         echo "Test script permissions updated."
     
+    - name: Check Directory Structure
+      run: |
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -R
+    
     - name: Execute Test Suite
       run: |
         echo "Initiating test suite..."
-        cd project
-        ../project/tests.sh
+        chmod +x ./project/tests.sh
+        ./project/tests.sh

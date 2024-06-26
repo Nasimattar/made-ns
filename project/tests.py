@@ -1,9 +1,14 @@
 import os
+import sys
+# Add the parent directory to sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 import unittest
 import importlib
 import pandas as pd
 import sqlite3 
-from . import pipeline
+import pipeline
 
 data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
 
