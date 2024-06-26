@@ -3,8 +3,8 @@ import unittest
 import importlib
 import pandas as pd
 import sqlite3 
+from . import pipeline
 
-pipeline = importlib.import_module("pipeline")
 data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
 
 class TestPipelineComponents(unittest.TestCase):

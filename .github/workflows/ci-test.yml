@@ -42,4 +42,5 @@ jobs:
     - name: Execute Test Suite
       run: |
         echo "Initiating test suite..."
-        ./project/tests.sh
+        cd project
+        ../project/tests.sh

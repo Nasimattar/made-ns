@@ -1,2 +1,3 @@
 #!/bin/bash
-python3 -m unittest project/tests.py
+cd project
+python3 -m unittest tests.py
