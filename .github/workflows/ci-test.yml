@@ -1,0 +1,45 @@
+name: Execute Test Suite
+
+on:
+  push:
+    branches: ['*']
+
+jobs:
+  test-suite:
+    name: Run Test Suite
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      name: Fetch Repository Content
+    
+    - name: Configure Python Environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.x'
+    
+    - name: Configure Kaggle Authentication
+      env:
+        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+        KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      run: |
+        mkdir -p ~/.kaggle
+        echo "{\"username\":\"$KAGGLE_USERNAME\",\"key\":\"$KAGGLE_KEY\"}" > ~/.kaggle/kaggle.json
+        chmod 600 ~/.kaggle/kaggle.json
+        echo "Kaggle credentials configured successfully."
+    
+    - name: Install Project Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        echo "Project dependencies installed."
+    
+    - name: Prepare Test Environment
+      run: |
+        chmod +x project/tests.sh
+        echo "Test script permissions updated."
+    
+    - name: Execute Test Suite
+      run: |
+        echo "Initiating test suite..."
+        ./project/tests.sh
